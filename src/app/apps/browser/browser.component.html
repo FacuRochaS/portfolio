@@ -46,8 +46,8 @@
           @for (proj of filteredProjects; track proj.id) {
             <div class="project-card" (click)="openProject(proj)">
               <div class="card-img-wrapper">
-                <div class="img-placeholder">
-                  <i class="pi pi-image"></i>
+                <div class="card-img-wrapper">
+                  <img [src]="proj.mainImage" [alt]="proj.name" class="project-thumbnail">
                 </div>
               </div>
               <div class="card-content">
@@ -97,8 +97,9 @@
               <div class="gallery-grid">
                 @for (item of activeProject.gallery; track item.imageUrl) {
                   <div class="gallery-item">
-                    <div class="gallery-img-placeholder"><i class="pi pi-image"></i></div>
+                    <img [src]="item.imageUrl" [alt]="'Gallery image'" class="gallery-img">
                     <p class="caption">{{ i18n.translations()[item.captionKey] }}</p>
+                  
                   </div>
                 }
               </div>

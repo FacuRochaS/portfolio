@@ -11,12 +11,39 @@
 }
 .desktop-icons {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 20px;
+  left: 20px;
+  z-index: 1;
+
+  /* Definimos que sea un Grid */
+  display: grid;
+  /* Creamos columnas automáticas */
+  grid-auto-flow: column;
+  /* FORZAMOS A QUE TENGA MÁXIMO 4 FILAS */
+  grid-template-rows: repeat(4, 1fr);
+  /* Espacio entre iconos */
+  gap: 20px;
+
+  /* Esto asegura que no se desborde del alto de la pantalla */
+  max-height: calc(100vh - 100px);
+}
+
+.icon {
+  width: 74px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  z-index: 1;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+  transition: background 0.2s;
+  /* Evitamos que el texto se vea cortado si el nombre es largo */
+  text-align: center;
+}
+
+.icon:hover {
+  background: rgba(255, 255, 255, 0.15);
 }
 .icon {
   width: 74px;

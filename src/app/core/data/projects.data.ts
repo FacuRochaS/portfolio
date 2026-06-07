@@ -38,8 +38,8 @@ export const PROJECTS_DATABASE: PortfolioProject[] = [
       { name: 'Docker', icon: 'devicon-docker-plain colored' }
     ],
     gallery: [
-      { imageUrl: 'assets/images/projects/studer-login.jpg', captionKey: 'studer_cap_1' },
-      { imageUrl: 'assets/images/projects/studer-home.jpg', captionKey: 'studer_cap_2' }
+      { imageUrl: 'assets/images/projects/studer-login.png', captionKey: 'studer_cap_1' },
+      { imageUrl: 'assets/images/projects/studer-home.png', captionKey: 'studer_cap_2' }
     ],
     githubUrl: 'https://github.com/FacuRochaS/STUDER'
   },

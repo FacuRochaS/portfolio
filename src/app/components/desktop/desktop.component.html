@@ -1,11 +1,14 @@
 <div class="desktop" [style.background-image]="'url(' + themeService.currentWallpaper() + ')'">
+
   <div class="desktop-icons">
-    <div class="icon" (dblclick)="openTerminal()">
-      <div class="icon-placeholder">
-        <i class="pi pi-code"></i>
+    @for (app of APPS; track app.id) {
+      <div class="icon" (dblclick)="windowManager.openWindow(app.id, i18n.translations()[app.titleKey], app.component, app.icon)">
+        <div class="icon-placeholder">
+          <i [class]="app.icon"></i>
+        </div>
+        <span class="icon-name">{{ i18n.translations()[app.titleKey] }}</span>
       </div>
-      <span class="icon-name">{{ i18n.translations()['app_terminal'] }}</span>
-    </div>
+    }
   </div>
 
   @for (win of windowManager.windows(); track win.id) {
