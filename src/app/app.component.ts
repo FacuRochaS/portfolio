@@ -1,4 +1,4 @@
-import {Component, HostListener, inject} from '@angular/core';
+import {Component, HostListener, inject, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WindowManagerService } from './core/services/window-manager.service';
 import { LoginComponent } from './components/login/login.component';
@@ -12,26 +12,34 @@ import {LogService} from './core/services/log.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   windowManager = inject(WindowManagerService);
   logService = inject(LogService);
 
 
-  @HostListener('window:load')
-  onLoad() {
+
+  ngOnInit() {
+    // Esto se ejecuta apenas Angular carga, es 100% seguro.
     this.logService.logEvent('Usuario entró al sitio');
   }
 
   @HostListener('window:beforeunload')
   onUnload() {
     const buffer = this.logService.getRawBuffer();
-    if (buffer.length > 0) {
-      const data = new FormData();
-      data.append('type', 'event');
-      data.append('message', 'Sesión finalizada (Cierre inesperado):\n' + buffer.join('\n'));
 
-      // sendBeacon es la forma más segura de enviar datos al cerrar la pestaña
-      navigator.sendBeacon('/api/send-message', data);
+    // Si quedaron eventos en el buffer (por ejemplo, el usuario navegó pero no llegó a 5)
+    if (buffer.length > 0) {
+      // 1. Creamos el objeto JSON
+      const payload = JSON.stringify({
+        type: 'event',
+        message: 'Sesión finalizada (Cierre de pestaña):\n' + buffer.join('\n')
+      });
+
+      // 2. Lo convertimos en un Blob especificando que es un JSON
+      const blob = new Blob([payload], { type: 'application/json' });
+
+      // 3. sendBeacon lo enviará correctamente a Vercel
+      navigator.sendBeacon('/api/send-message', blob);
     }
   }
 }
