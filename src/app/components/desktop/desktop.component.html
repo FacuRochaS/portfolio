@@ -1,0 +1,16 @@
+<div class="desktop" [style.background-image]="'url(' + themeService.currentWallpaper() + ')'">
+  <div class="desktop-icons">
+    <div class="icon" (dblclick)="openTerminal()">
+      <div class="icon-placeholder">
+        <i class="pi pi-code"></i>
+      </div>
+      <span class="icon-name">{{ i18n.translations()['app_terminal'] }}</span>
+    </div>
+  </div>
+
+  @for (win of windowManager.windows(); track win.id) {
+    <app-window-container [windowData]="win"></app-window-container>
+  }
+
+  <app-taskbar></app-taskbar>
+</div>

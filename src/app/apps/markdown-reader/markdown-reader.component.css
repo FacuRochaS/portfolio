@@ -1,0 +1,77 @@
+.markdown-app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #fdfdfd;
+  color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.md-toolbar {
+  height: 40px;
+  background: #f0f0f0;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+  user-select: none;
+}
+
+.md-content {
+  flex: 1;
+  padding: 30px 40px;
+  overflow-y: auto;
+  line-height: 1.6;
+}
+
+/* Estilos inyectados para el HTML parseado */
+.md-content h1 {
+  font-size: 2em;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid #eaecef;
+}
+
+.md-content h2 {
+  font-size: 1.5em;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid #eaecef;
+}
+
+.md-content h3 {
+  font-size: 1.25em;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.md-content p {
+  margin-bottom: 1em;
+}
+
+.md-content a {
+  color: #0366d6;
+  text-decoration: none;
+}
+.md-content a:hover {
+  text-decoration: underline;
+}
+
+.md-content ul {
+  padding-left: 2em;
+  margin-bottom: 1em;
+}
+
+.md-content li {
+  margin-bottom: 0.25em;
+}
+
+.md-content strong {
+  font-weight: 600;
+}

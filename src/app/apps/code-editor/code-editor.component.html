@@ -1,0 +1,113 @@
+<div class="ide-container" (click)="closeDropdown()">
+  <!-- IDE Toolbar -->
+  <div class="ide-toolbar">
+    <div class="toolbar-left">
+      <div class="dropdown-container">
+        <button class="toolbar-btn" (click)="toggleProjectDropdown($event)">
+          <i class="pi pi-folder-open"></i> {{ i18n.translations()['editor_open_project'] }}
+        </button>
+        <!-- Dropdown Menu -->
+        @if (showProjectDropdown) {
+          <div class="project-dropdown">
+            @if (availableProjects.length === 0) {
+              <div class="dropdown-item empty">{{ i18n.translations()['editor_no_projects_found'] }}</div>
+            }
+            @for (proj of availableProjects; track proj.id) {
+              <div class="dropdown-item" (click)="loadProject(proj.id)">
+                <i [class]="proj.icon"></i>
+                <span>{{ proj.isStaticName ? proj.nameKey : (i18n.translations()[proj.nameKey] || proj.nameKey) }}</span>
+              </div>
+            }
+          </div>
+        }
+      </div>
+      <span class="project-name">{{ projectName }}</span>
+    </div>
+    <div class="toolbar-right">
+      <button class="toolbar-btn run-btn" (click)="runCode()">
+        <i class="pi pi-play"></i> {{ i18n.translations()['editor_run'] }}
+      </button>
+    </div>
+  </div>
+
+  <div class="ide-main">
+    <!-- Project Explorer (Sidebar) -->
+    <div class="ide-sidebar">
+      <div class="sidebar-header">{{ i18n.translations()['editor_project_header'] }}</div>
+      <div class="file-tree">
+        <!-- Render recursivo con template -->
+        <ng-template #treeNodeTemplate let-nodes="nodes">
+          @for (node of nodes; track node.id) {
+            <div class="tree-node" [class.is-folder]="node.isFolder">
+              <div class="node-content"
+                   [style.padding-left.px]="node.level * 15 + 10"
+                   [class.active]="activeFileId === node.id"
+                   (click)="handleNodeClick(node)">
+
+                @if (node.isFolder) {
+                  <i class="pi" [class.pi-angle-right]="!node.expanded" [class.pi-angle-down]="node.expanded" style="font-size: 12px; margin-right: 3px;"></i>
+                  <i [class]="node.icon" style="color: #dbb54d; margin-right: 5px;"></i>
+                } @else {
+                  <i [class]="node.icon" style="margin-left: 14px; margin-right: 5px;"></i>
+                }
+                <span class="node-name">{{ node.name }}</span>
+              </div>
+
+              @if (node.isFolder && node.expanded && node.children) {
+                <ng-container *ngTemplateOutlet="treeNodeTemplate; context: { nodes: node.children }"></ng-container>
+              }
+            </div>
+          }
+        </ng-template>
+
+        <ng-container *ngTemplateOutlet="treeNodeTemplate; context: { nodes: fileTree }"></ng-container>
+      </div>
+    </div>
+
+    <!-- Editor Area -->
+    <div class="ide-editor-area">
+      <!-- Editor Tabs -->
+      <div class="editor-tabs">
+        @if (activeFileName) {
+          <div class="editor-tab active">
+            <i [class]="activeFileIcon" style="margin-right: 5px;"></i> {{ activeFileName }}
+          </div>
+        }
+      </div>
+
+      <!-- Code Editor Content -->
+      <div class="editor-content-wrapper">
+        <div class="line-numbers">
+          @for (line of lineNumbers; track $index) {
+            <div>{{ line }}</div>
+          }
+        </div>
+        <div class="code-input-container">
+          <textarea
+            class="code-textarea"
+            [(ngModel)]="codeContent"
+            (input)="updateLines()"
+            spellcheck="false"
+            wrap="off"
+            [disabled]="!activeFileId">
+          </textarea>
+          <div class="code-highlight" [innerHTML]="highlightedCode"></div>
+        </div>
+      </div>
+
+      <!-- Console Output -->
+      <div class="ide-console">
+        <div class="console-header">
+          <i class="pi pi-terminal"></i> {{ i18n.translations()['editor_console'] }}
+        </div>
+        <div class="console-output">
+          @for (msg of consoleOutput; track $index) {
+            <div [class.error]="msg.isError" class="log-msg">
+              <span class="timestamp">[{{ msg.time }}]</span> {{ msg.text }}
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

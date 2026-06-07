@@ -1,0 +1,54 @@
+<div class="taskbar" (click)="$event.stopPropagation()">
+
+  <!-- START MENU FLOATING -->
+  @if (isStartMenuOpen) {
+    <div class="start-menu">
+      <div class="start-menu-header">
+        <div class="user-info">
+          <!-- Reemplazo de imagen 404 por ícono -->
+          <div class="user-icon"><i class="pi pi-user"></i></div>
+          <span>Facundo</span>
+        </div>
+      </div>
+
+      <div class="apps-grid">
+        @for (app of appsList; track app.id) {
+          <div class="app-item" (click)="openApp(app)">
+            <div class="app-icon"><i [class]="app.icon"></i></div>
+            <span class="app-name">{{ i18n.translations()[app.titleKey] || app.titleKey }}</span>
+          </div>
+        }
+      </div>
+    </div>
+  }
+
+  <!-- Start Menu Button -->
+  <div class="start-btn" (click)="toggleStartMenu($event)" [class.active]="isStartMenuOpen">
+    <i class="pi pi-home" style="font-size: 1.2rem;"></i>
+  </div>
+
+  <!-- Active Apps -->
+  <div class="apps-container">
+    @for (win of windowManager.windows(); track win.id) {
+      <div class="app-btn"
+           [class.active]="win.isFocused"
+           (click)="toggleWindow(win.id)">
+           <i [class]="win.icon || 'pi pi-window-maximize'" class="icon"></i>
+           <!-- Se traduce dinámicamente el titleKey de la ventana, y se le concatena texto extra si lo hay (ej: - main.ts) -->
+           <span class="title">{{ (i18n.translations()[win.titleKey] || win.titleKey) + (win.titleExtra ? win.titleExtra : '') }}</span>
+           @if (!win.isMinimized) {
+             <div class="indicator"></div>
+           }
+      </div>
+    }
+  </div>
+
+  <!-- System Tray -->
+  <div class="sys-tray">
+    <div class="tray-item lang" (click)="toggleLanguage()">
+      <i class="pi pi-globe" style="margin-right: 5px;"></i>{{ i18n.currentLang() | uppercase }}
+    </div>
+    <div class="tray-item battery"><i class="pi pi-bolt" style="margin-right: 5px;"></i> {{ windowManager.systemData().batteryLevel }}%</div>
+    <div class="tray-item time">{{ windowManager.systemData().time | date:'HH:mm' }}</div>
+  </div>
+</div>

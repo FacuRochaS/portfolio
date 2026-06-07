@@ -1,0 +1,209 @@
+<div class="about-container">
+  <aside class="about-sidebar">
+    <div class="sidebar-profile">
+      <div class="avatar-mini">
+        <i class="pi pi-user"></i>
+      </div>
+      <span class="user-name">{{ i18n.translations()['about_name'] }}</span>
+      <span class="user-title">{{ i18n.translations()['about_role'] }}</span>
+    </div>
+
+    <nav class="about-nav">
+      <button [class.active]="activeSection === 'profile'" (click)="setSection('profile')">
+        <i class="pi pi-id-card"></i> {{ i18n.translations()['about_tab_profile'] }}
+      </button>
+      <button [class.active]="activeSection === 'skills'" (click)="setSection('skills')">
+        <i class="pi pi-bolt"></i> {{ i18n.translations()['about_tab_skills'] }}
+      </button>
+      <button [class.active]="activeSection === 'experience'" (click)="setSection('experience')">
+        <i class="pi pi-briefcase"></i> {{ i18n.translations()['about_tab_experience'] }}
+      </button>
+      <button [class.active]="activeSection === 'education'" (click)="setSection('education')">
+        <i class="pi pi-book"></i> {{ i18n.translations()['about_tab_education'] }}
+      </button>
+      <button [class.active]="activeSection === 'contact'" (click)="setSection('contact')">
+        <i class="pi pi-envelope"></i> {{ i18n.translations()['about_tab_contact'] }}
+      </button>
+    </nav>
+  </aside>
+
+  <main class="about-content">
+
+    @switch (activeSection) {
+
+      @case ('profile') {
+        <section class="fade-in">
+          <h2>{{ i18n.translations()['about_hello'] }} <span class="wave">👋</span></h2>
+          <p class="bio-text">{{ i18n.translations()['about_bio_1'] }}</p>
+          <p class="bio-text">{{ i18n.translations()['about_bio_2'] }}</p>
+          <p class="bio-text">{{ i18n.translations()['about_bio_3'] }}</p>
+
+          <div class="info-grid">
+            <div class="info-card">
+              <i class="pi pi-map-marker"></i>
+              <span>Córdoba, Argentina</span>
+            </div>
+            <div class="info-card">
+              <i class="pi pi-check-circle"></i>
+              <span>{{ i18n.translations()['about_soft_skills'] }}</span>
+            </div>
+          </div>
+        </section>
+      }
+
+      @case ('skills') {
+        <section class="fade-in">
+          <h2>{{ i18n.translations()['about_tab_skills'] }}</h2>
+          <p class="section-desc">{{ i18n.translations()['about_skills_desc'] }}</p>
+
+          <div class="skills-grid">
+            <div class="skill-category">
+              <h3>Lenguajes</h3>
+              <div class="badges">
+                <span class="tech-badge java"><i class="devicon-java-plain"></i> Java</span>
+                <span class="tech-badge csharp"><i class="devicon-csharp-plain"></i> C#</span>
+                <span class="tech-badge python"><i class="devicon-python-plain"></i> Python</span>
+                <span class="tech-badge ts"><i class="devicon-typescript-plain"></i> TypeScript</span>
+                <span class="tech-badge js"><i class="devicon-javascript-plain"></i> JavaScript</span>
+              </div>
+            </div>
+
+            <div class="skill-category">
+              <h3>Frameworks</h3>
+              <div class="badges">
+                <span class="tech-badge angular"><i class="devicon-angularjs-plain"></i> Angular</span>
+                <span class="tech-badge spring"><i class="devicon-spring-plain"></i> Spring Boot</span>
+                <span class="tech-badge dotnet"><i class="devicon-dot-net-plain"></i> Entity Framework</span>
+              </div>
+            </div>
+
+            <div class="skill-category">
+              <h3>Bases de Datos</h3>
+              <div class="badges">
+                <span class="tech-badge sql"><i class="pi pi-database"></i> SQL / PostgreSQL</span>
+                <span class="tech-badge mongo"><i class="devicon-mongodb-plain"></i> MongoDB</span>
+                <span class="tech-badge redis"><i class="devicon-redis-plain"></i> Redis</span>
+                <span class="tech-badge neo4j"><i class="devicon-neo4j-plain"></i> Neo4j</span>
+                <span class="tech-badge cassandra"><i class="pi pi-server"></i> Cassandra</span>
+              </div>
+            </div>
+
+            <div class="skill-category">
+              <h3>Herramientas & Entornos</h3>
+              <div class="badges">
+                <span class="tech-badge docker"><i class="devicon-docker-plain"></i> Docker</span>
+                <span class="tech-badge git"><i class="devicon-git-plain"></i> Git</span>
+                <span class="tech-badge linux"><i class="devicon-linux-plain"></i> Entornos Linux</span>
+                <span class="tech-badge qa"><i class="pi pi-check-square"></i> Testing / QA</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      }
+
+      @case ('experience') {
+        <section class="fade-in">
+          <h2>{{ i18n.translations()['about_tab_experience'] }}</h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-icon"><i class="pi pi-desktop"></i></div>
+              <div class="timeline-content">
+                <h3>{{ i18n.translations()['exp_lab_title'] }}</h3>
+                <p class="desc-text">{{ i18n.translations()['exp_lab_desc_1'] }}</p>
+                <p class="desc-text">{{ i18n.translations()['exp_lab_desc_2'] }}</p>
+                <div class="tech-stack-mini">
+                  <span class="badge">Java</span><span class="badge">Spring</span><span class="badge">Angular</span><span class="badge">MySQL</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-icon"><i class="pi pi-globe"></i></div>
+              <div class="timeline-content">
+                <h3>{{ i18n.translations()['exp_web_title'] }}</h3>
+                <p class="desc-text">{{ i18n.translations()['exp_web_desc'] }}</p>
+                <div class="tech-stack-mini">
+                  <span class="badge">Java</span><span class="badge">C#</span><span class="badge">Angular</span><span class="badge">PostgreSQL</span><span class="badge">TypeScript</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      }
+
+      @case ('education') {
+        <section class="fade-in">
+          <h2>{{ i18n.translations()['about_tab_education'] }}</h2>
+
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-icon"><i class="pi pi-graduation-cap"></i></div>
+              <div class="timeline-content">
+                <h3>{{ i18n.translations()['edu_utn_title'] }}</h3>
+                <h4>{{ i18n.translations()['edu_utn_inst'] }}</h4>
+                <p class="date">{{ i18n.translations()['edu_utn_date'] }}</p>
+                <p class="desc-text">{{ i18n.translations()['edu_utn_desc'] }}</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-icon"><i class="pi pi-server"></i></div>
+              <div class="timeline-content">
+                <h3>{{ i18n.translations()['edu_famaf_title'] }}</h3>
+                <h4>{{ i18n.translations()['edu_famaf_inst'] }}</h4>
+                <p class="date">{{ i18n.translations()['edu_famaf_date'] }}</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-icon"><i class="pi pi-chart-bar"></i></div>
+              <div class="timeline-content">
+                <h3>{{ i18n.translations()['edu_unsam_title'] }}</h3>
+                <h4>{{ i18n.translations()['edu_unsam_inst'] }}</h4>
+                <p class="date">2023</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-icon"><i class="pi pi-book"></i></div>
+              <div class="timeline-content">
+                <h3>{{ i18n.translations()['edu_school_title'] }}</h3>
+                <h4>{{ i18n.translations()['edu_school_inst'] }}</h4>
+                <p class="date">2022</p>
+              </div>
+            </div>
+          </div>
+
+          <h3 style="margin-top: 40px; border-bottom: 1px solid #333; padding-bottom: 10px;">{{ i18n.translations()['cert_title'] }}</h3>
+          <ul class="cert-list">
+            <li><i class="pi pi-google"></i> {{ i18n.translations()['cert_1'] }}</li>
+            <li><i class="pi pi-microchip"></i> {{ i18n.translations()['cert_2'] }}</li>
+          </ul>
+        </section>
+      }
+
+      @case ('contact') {
+        <section class="fade-in">
+          <h2>{{ i18n.translations()['about_tab_contact'] }}</h2>
+          <p class="section-desc">{{ i18n.translations()['about_contact_desc'] }}</p>
+
+          <div class="contact-links">
+            <a href="https://github.com/FacuRochaS" target="_blank" class="contact-btn github">
+              <i class="pi pi-github"></i> GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/facundo-rocha-seret-49aba5293/" target="_blank" class="contact-btn linkedin">
+              <i class="pi pi-linkedin"></i> LinkedIn
+            </a>
+            <a href="mailto:facurochaseret@gmail.com" class="contact-btn email">
+              <i class="pi pi-envelope"></i> facurochaseret&#64;gmail.com
+            </a>
+            <a href="tel:+5493543303556" class="contact-btn phone">
+              <i class="pi pi-whatsapp"></i> +54 9 3543 303556
+            </a>
+          </div>
+        </section>
+      }
+
+    }
+  </main>
+</div>

@@ -1,0 +1,150 @@
+.settings-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  background-color: #202020;
+  color: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* SIDEBAR */
+.settings-sidebar {
+  width: 220px;
+  background-color: #181818;
+  border-right: 1px solid #333;
+  padding: 20px 10px;
+}
+.settings-sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.settings-sidebar li {
+  padding: 10px 15px;
+  margin-bottom: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #ccc;
+  transition: background 0.2s;
+}
+.settings-sidebar li:hover {
+  background-color: #2a2a2a;
+}
+.settings-sidebar li.active {
+  background-color: #333;
+  color: #fff;
+  border-left: 3px solid #0078d4; /* Color de acento tipo Windows */
+}
+
+/* CONTENT AREA */
+.settings-content {
+  flex: 1;
+  padding: 30px 40px;
+  overflow-y: auto;
+}
+
+.settings-section {
+  margin-bottom: 40px;
+}
+h2 {
+  font-size: 24px;
+  font-weight: 400;
+  margin: 0 0 5px 0;
+}
+.subtitle {
+  color: #a0a0a0;
+  font-size: 14px;
+  margin: 0 0 20px 0;
+}
+.divider {
+  border: 0;
+  height: 1px;
+  background-color: #333;
+  margin: 30px 0;
+}
+
+/* WALLPAPER GRID */
+.wallpaper-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.wallpaper-card {
+  width: 160px;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 8px;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  transition: all 0.2s;
+}
+.wallpaper-card:hover {
+  background-color: #2a2a2a;
+}
+.wallpaper-card.active {
+  background-color: #333;
+  border-color: #0078d4;
+}
+
+.wp-preview {
+  width: 100%;
+  height: 90px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+.wp-name {
+  font-size: 13px;
+  text-align: center;
+  color: #ccc;
+}
+
+.active-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: #0078d4;
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+/* INFO LIST */
+.info-list {
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  padding: 15px 20px;
+  border: 1px solid #333;
+}
+.info-item {
+  display: flex;
+  padding: 8px 0;
+  border-bottom: 1px solid #333;
+  font-size: 14px;
+}
+.info-item:last-child {
+  border-bottom: none;
+}
+.info-label {
+  width: 120px;
+  color: #a0a0a0;
+}
+.info-value {
+  color: #fff;
+  font-weight: 500;
+}

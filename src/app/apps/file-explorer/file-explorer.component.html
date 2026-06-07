@@ -1,0 +1,56 @@
+<div class="explorer-container">
+  <!-- Top Bar (Toolbar & Breadcrumbs) -->
+  <div class="top-bar">
+    <div class="nav-controls">
+      <button class="nav-btn" (click)="goBack()" [disabled]="currentFolderId() === 'root'">
+        <i class="pi pi-arrow-left"></i>
+      </button>
+      <button class="nav-btn" disabled><i class="pi pi-arrow-right"></i></button>
+      <button class="nav-btn" (click)="openFolder('root')"><i class="pi pi-home"></i></button>
+    </div>
+
+    <div class="breadcrumbs">
+      @for (crumb of breadcrumbs(); track crumb.id; let last = $last) {
+        <span class="crumb-item" (click)="openFolder(crumb.id)">
+          @if (!last) {
+            {{ getTranslatedName(crumb) }} <i class="pi pi-angle-right separator"></i>
+          } @else {
+            <span class="crumb-current">{{ getTranslatedName(crumb) }}</span>
+          }
+        </span>
+      }
+    </div>
+  </div>
+
+  <!-- Main Content Area -->
+  <div class="main-area">
+    <!-- Left Sidebar (Pinned Folders) -->
+    <div class="sidebar">
+      <div class="sidebar-title">{{ i18n.translations()['explorer_quick_access'] }}</div>
+      @for (folder of pinnedFolders(); track folder.id) {
+        <div class="sidebar-item"
+             [class.active]="currentFolderId() === folder.id"
+             (click)="openFolder(folder.id)">
+          <i [class]="folder.icon"></i>
+          <span>{{ getTranslatedName(folder) }}</span>
+        </div>
+      }
+    </div>
+
+    <!-- Right Content (Files Grid) -->
+    <div class="content-grid">
+      @if (currentFiles().length === 0) {
+        <div class="empty-state">{{ i18n.translations()['explorer_empty_folder'] }}</div>
+      } @else {
+        @for (file of currentFiles(); track file.id) {
+          <div class="file-item" (dblclick)="handleFileClick(file)">
+            <div class="file-icon">
+              <i [class]="file.icon"></i>
+            </div>
+            <span class="file-name" [title]="getTranslatedName(file)">{{ getTranslatedName(file) }}</span>
+          </div>
+        }
+      }
+    </div>
+  </div>
+</div>

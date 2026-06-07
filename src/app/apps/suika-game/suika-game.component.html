@@ -1,0 +1,36 @@
+<div class="suika-app-container">
+
+  <div class="arcade-sidebar">
+    <div class="header-title">
+      <i class="pi pi-box"></i> MERGE<br><span>DEV</span>
+    </div>
+
+    <div class="sidebar-stats">
+      <div class="stat-box">
+        <span class="stat-label">{{ i18n.translations()['game_score'] || 'Score' }}</span>
+        <span class="stat-value">{{ score }}</span>
+      </div>
+
+      <div class="stat-box">
+        <span class="stat-label">{{ i18n.translations()['game_next'] || 'Next' }}</span>
+        <div class="next-indicator-wrapper">
+          <img class="next-indicator"
+               [src]="getTechIcon(nextTechLevel)"
+               [title]="getTechName(nextTechLevel)"
+               alt="Next Tech">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="game-wrapper">
+    <div class="arcade-machine">
+      <div #gameContainer class="canvas-container" (click)="dropTech($event)">
+      </div>
+      <div class="instruction-overlay">
+        Click to drop
+      </div>
+    </div>
+  </div>
+
+</div>

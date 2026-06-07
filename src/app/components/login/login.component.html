@@ -1,0 +1,19 @@
+<div class="login-screen" [style.background-image]="'url(' + themeService.currentWallpaper() + ')'">
+  <div class="background-blur"></div>
+
+  <div class="lang-switch" (click)="i18n.toggleLanguage()">
+    <i class="pi pi-globe"></i> {{ i18n.currentLang() | uppercase }}
+  </div>
+
+  <div class="login-container">
+    <div class="avatar">
+      <i class="pi pi-user avatar-icon"></i>
+    </div>
+    <div class="input-container">
+      <input type="text" [placeholder]="i18n.translations()['login_placeholder']" [value]="typedName" readonly>
+      @if (showCursor) {
+        <span class="cursor">|</span>
+      }
+    </div>
+  </div>
+</div>

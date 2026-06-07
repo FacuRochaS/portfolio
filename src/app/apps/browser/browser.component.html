@@ -1,0 +1,111 @@
+<div class="browser-container">
+  <div class="browser-toolbar">
+    <div class="browser-actions">
+      <button class="nav-btn" (click)="goBack()" [disabled]="history.length <= 1">
+        <i class="pi pi-arrow-left"></i>
+      </button>
+      <button class="nav-btn" disabled><i class="pi pi-arrow-right"></i></button>
+      <button class="nav-btn" (click)="goHome()"><i class="pi pi-home"></i></button>
+    </div>
+
+    <div class="address-bar">
+      <div class="security-badge">
+        <i class="pi" [class.pi-lock]="!is404" [class.pi-info-circle]="is404"></i>
+      </div>
+
+      <input type="text" [(ngModel)]="currentUrl" (keyup.enter)="navigateToUserUrl()">
+    </div>
+  </div>
+
+  <div class="browser-viewport">
+
+    @if (is404) {
+      <div class="error-page">
+        <div class="error-content">
+          <div class="dino-container">
+            <iframe [src]="dinoGameUrl" scrolling="no" frameborder="0"></iframe>
+          </div>
+          <div class="error-text">
+            <h2>{{ i18n.translations()['browser_error_title'] }}</h2>
+            <p>{{ i18n.translations()['browser_error_desc'] }}</p>
+            <p class="error-code">ERR_NAME_NOT_RESOLVED</p>
+          </div>
+        </div>
+      </div>
+    } @else if (!activeProject) {
+      <div class="home-page">
+        <div class="search-engine">
+          <h1 class="logo">Facu<span>Search</span></h1>
+          <div class="search-input-wrapper">
+            <i class="pi pi-search"></i>
+            <input type="text" [(ngModel)]="searchQuery" [placeholder]="i18n.translations()['browser_search_placeholder']">
+          </div>
+        </div>
+
+        <div class="projects-grid">
+          @for (proj of filteredProjects; track proj.id) {
+            <div class="project-card" (click)="openProject(proj)">
+              <div class="card-img-wrapper">
+                <div class="img-placeholder">
+                  <i class="pi pi-image"></i>
+                </div>
+              </div>
+              <div class="card-content">
+                <h3>{{ proj.name }}</h3>
+                <p>{{ i18n.translations()[proj.shortDescKey] }}</p>
+                <div class="tech-row">
+                  @for (tech of proj.technologies; track tech.name) {
+                    <i [class]="tech.icon" [title]="tech.name"></i>
+                  }
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    } @else {
+      <div class="project-page">
+        <div class="project-hero">
+          <h1>{{ activeProject.name }}</h1>
+          <p class="project-date">{{ i18n.translations()[activeProject.dateKey] }}</p>
+          <div class="project-tech-stack">
+            @for (tech of activeProject.technologies; track tech.name) {
+              <span class="tech-badge">
+                <i [class]="tech.icon"></i> {{ tech.name }}
+              </span>
+            }
+          </div>
+        </div>
+
+        <div class="project-body">
+          <div class="project-description">
+            <h2>{{ i18n.translations()['browser_about_project'] }}</h2>
+            <p class="desc-text">{{ i18n.translations()[activeProject.fullDescKey] }}</p>
+
+            <div class="project-links">
+              @if (activeProject.githubUrl) {
+                <a [href]="activeProject.githubUrl" target="_blank" class="repo-btn">
+                  <i class="pi pi-github"></i> GitHub Repository
+                </a>
+              }
+            </div>
+          </div>
+
+          @if (activeProject.gallery.length > 0) {
+            <div class="project-gallery">
+              <h2>{{ i18n.translations()['browser_gallery'] }}</h2>
+              <div class="gallery-grid">
+                @for (item of activeProject.gallery; track item.imageUrl) {
+                  <div class="gallery-item">
+                    <div class="gallery-img-placeholder"><i class="pi pi-image"></i></div>
+                    <p class="caption">{{ i18n.translations()[item.captionKey] }}</p>
+                  </div>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</div>

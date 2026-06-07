@@ -1,0 +1,56 @@
+<div class="messenger-container">
+
+  <header class="chat-header">
+    <div class="profile-info">
+      <div class="avatar"><i class="pi pi-user"></i></div>
+      <div class="details">
+        <h3>Facundo Rocha</h3>
+        <span class="status"><span class="dot"></span> {{ i18n.translations()['msg_online'] }}</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="chat-history">
+    <div class="message-bubble received">
+      <p>{{ i18n.translations()['msg_welcome'] }}</p>
+      <span class="time">Ahora</span>
+    </div>
+
+    @if (status === 'success') {
+      <div class="message-bubble system success">
+        <i class="pi pi-check-circle"></i> {{ i18n.translations()['msg_success'] }}
+      </div>
+    }
+
+    @if (status === 'error') {
+      <div class="message-bubble system error">
+        <i class="pi pi-times-circle"></i> {{ i18n.translations()['msg_error'] }}
+      </div>
+    }
+  </div>
+
+  <div class="chat-input-area">
+    <div class="input-group name-group">
+      <i class="pi pi-id-card"></i>
+      <input type="text" [(ngModel)]="senderName" [placeholder]="i18n.translations()['msg_name_placeholder']" [disabled]="isSending">
+    </div>
+
+    <div class="input-group message-group">
+      <textarea
+        [(ngModel)]="messageText"
+        [placeholder]="i18n.translations()['msg_type_placeholder']"
+        (keyup.enter)="sendMessage()"
+        [disabled]="isSending"
+        rows="2">
+      </textarea>
+      <button class="send-btn" (click)="sendMessage()" [disabled]="!messageText.trim() || isSending">
+        @if (isSending) {
+          <i class="pi pi-spinner pi-spin"></i>
+        } @else {
+          <i class="pi pi-send"></i>
+        }
+      </button>
+    </div>
+  </div>
+
+</div>

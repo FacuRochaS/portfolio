@@ -1,0 +1,39 @@
+@if (!windowData.isMinimized) {
+  <div class="window"
+       [class.maximized]="windowData.isMaximized"
+       [class.focused]="windowData.isFocused"
+       [class.dragging]="isDragging || isResizing"
+       [style.z-index]="windowData.zIndex"
+       [style.left.px]="windowData.isMaximized ? 0 : currentX"
+       [style.top.px]="windowData.isMaximized ? 0 : currentY"
+       [style.width]="windowData.isMaximized ? '100%' : currentWidth + 'px'"
+       [style.height]="windowData.isMaximized ? 'calc(100% - 40px)' : currentHeight + 'px'"
+       (mousedown)="focusWindow()">
+
+       <!-- Drag header -->
+       <div class="title-bar"
+            (dblclick)="toggleMaximize()"
+            (mousedown)="startDrag($event)">
+         <div class="title">
+           @if (windowData.icon) {
+             <i [class]="windowData.icon" style="margin-right: 5px;"></i>
+           }
+           {{ (i18n.translations()[windowData.titleKey] || windowData.titleKey) + (windowData.titleExtra ? windowData.titleExtra : '') }}
+         </div>
+         <div class="controls" (mousedown)="$event.stopPropagation()">
+           <button class="btn minimize" (click)="minimize($event)"><i class="pi pi-minus"></i></button>
+           <button class="btn maximize" (click)="toggleMaximize($event)"><i class="pi pi-stop"></i></button>
+           <button class="btn close" (click)="close($event)"><i class="pi pi-times"></i></button>
+         </div>
+       </div>
+
+       <div class="content">
+         <ng-container *ngComponentOutlet="windowData.component; inputs: getComponentInputs()"></ng-container>
+       </div>
+
+       <!-- Resize handles -->
+       <div class="resizer resizer-r" (mousedown)="startResize($event, 'r')"></div>
+       <div class="resizer resizer-b" (mousedown)="startResize($event, 'b')"></div>
+       <div class="resizer resizer-br" (mousedown)="startResize($event, 'br')"></div>
+  </div>
+}

@@ -1,0 +1,169 @@
+.taskbar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background: rgba(24, 24, 24, 0.95);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  z-index: 10000;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.5);
+  color: white;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+/* START MENU */
+.start-menu {
+  position: absolute;
+  bottom: 45px;
+  left: 10px;
+  width: 320px;
+  min-height: 400px;
+  background: rgba(30, 30, 30, 0.95);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  box-shadow: 0 -5px 25px rgba(0,0,0,0.6);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: slideUp 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transform-origin: bottom left;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.start-menu-header {
+  padding: 15px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.02);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.user-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  color: rgba(255,255,255,0.8);
+}
+.user-info span {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.apps-grid {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  overflow-y: auto;
+}
+
+.app-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+.app-item:hover {
+  background: rgba(255,255,255,0.1);
+}
+.app-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+.app-name {
+  font-size: 11px;
+  text-align: center;
+  color: #ddd;
+}
+
+/* TASKBAR BUTTONS */
+.start-btn {
+  width: 40px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.2s;
+  border-radius: 4px;
+}
+.start-btn:hover { background: rgba(255,255,255,0.1); }
+.start-btn.active { background: rgba(255,255,255,0.2); color: #4cc2ff; }
+
+.apps-container {
+  flex: 1;
+  display: flex;
+  height: 100%;
+  margin-left: 10px;
+}
+.app-btn {
+  height: 100%;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  position: relative;
+  border-radius: 4px;
+  margin: 2px;
+  transition: background 0.2s;
+}
+.app-btn:hover { background: rgba(255,255,255,0.1); }
+.app-btn.active { background: rgba(255,255,255,0.15); }
+
+.app-btn .icon { font-size: 14px; }
+.app-btn .title { font-size: 12px; max-width: 120px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.app-btn .indicator {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 3px;
+  background: #4cc2ff;
+  border-radius: 3px 3px 0 0;
+}
+
+.sys-tray {
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+.tray-item {
+  padding: 0 10px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  cursor: pointer;
+}
+.tray-item:hover { background: rgba(255,255,255,0.1); }

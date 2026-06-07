@@ -1,0 +1,81 @@
+.window {
+  position: absolute;
+  background: #232323;
+  border: 1px solid #444;
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  overflow: hidden;
+  min-width: 250px;
+  min-height: 150px;
+  /* Aseguramos que la transición no interfiera con el drag */
+  transition: box-shadow 0.2s;
+}
+.window.focused {
+  border-color: #666;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+}
+.window.maximized {
+  border-radius: 0;
+  border: none;
+}
+.window.dragging {
+  opacity: 0.95;
+}
+.window.dragging .content {
+  pointer-events: none;
+  user-select: none;
+}
+
+.title-bar {
+  height: 32px;
+  background: #1a1a1a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+  cursor: default;
+}
+.title-bar:active { cursor: grabbing; }
+.focused .title-bar { background: #333; }
+
+.title {
+  color: white;
+  font-size: 13px;
+  padding-left: 10px;
+  display: flex;
+  align-items: center;
+  pointer-events: none; /* Para no soltar el drag al pasar por encima del texto */
+}
+
+.controls { display: flex; height: 100%; }
+.btn {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  width: 46px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+  transition: background 0.1s;
+}
+.btn:hover { background: rgba(255,255,255,0.1); }
+.btn.close:hover { background: #e81123; }
+
+.content {
+  flex: 1;
+  background: #1e1e1e;
+  overflow: auto;
+  position: relative;
+}
+
+/* Resizers */
+.resizer { position: absolute; }
+.resizer-r { width: 5px; height: 100%; right: 0; top: 0; cursor: ew-resize; }
+.resizer-b { width: 100%; height: 5px; bottom: 0; left: 0; cursor: ns-resize; }
+.resizer-br { width: 15px; height: 15px; bottom: 0; right: 0; cursor: nwse-resize; z-index: 10; }
+.maximized .resizer { display: none; }

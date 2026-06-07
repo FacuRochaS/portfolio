@@ -1,0 +1,222 @@
+.browser-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background: #ffffff; /* El interior del navegador es blanco/claro */
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: #333;
+}
+
+/* BROWSER CHROME */
+.browser-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 8px 15px;
+  background-color: #202124; /* Estilo Chrome Dark Mode para la UI del navegador */
+  border-bottom: 1px solid #000;
+}
+
+.browser-actions {
+  display: flex;
+  gap: 5px;
+}
+
+.nav-btn {
+  background: transparent;
+  border: none;
+  color: #e8eaed;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.nav-btn:hover:not(:disabled) { background-color: #3c4043; }
+.nav-btn:disabled { color: #5f6368; cursor: default; }
+
+.address-bar {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background-color: #282a2d;
+  border-radius: 20px;
+  padding: 0 15px;
+  height: 34px;
+}
+
+.security-badge { color: #9aa0a6; margin-right: 10px; font-size: 12px; }
+
+.address-bar input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #e8eaed;
+  font-size: 14px;
+  outline: none;
+}
+
+/* VIEWPORT */
+.browser-viewport {
+  flex: 1;
+  overflow-y: auto;
+  background-color: #f8f9fa;
+}
+
+/* HOME PAGE */
+.home-page { padding: 40px 20px; display: flex; flex-direction: column; align-items: center; }
+
+.search-engine { text-align: center; margin-bottom: 50px; width: 100%; max-width: 600px; }
+.logo { font-size: 48px; color: #4285f4; margin-bottom: 20px; }
+.logo span { color: #ea4335; }
+
+.search-input-wrapper {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #dfe1e5;
+  border-radius: 24px;
+  padding: 10px 20px;
+  box-shadow: 0 1px 6px rgba(32,33,36,.28);
+}
+.search-input-wrapper i { color: #9aa0a6; margin-right: 10px; }
+.search-input-wrapper input { flex: 1; border: none; outline: none; font-size: 16px; }
+
+/* GRID */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.project-card {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid #ebebeb;
+}
+.project-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px rgba(0,0,0,0.1); }
+
+.img-placeholder {
+  height: 160px;
+  background: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 32px;
+}
+
+.card-content { padding: 15px; }
+.card-content h3 { margin: 0 0 10px 0; font-size: 18px; color: #202124; }
+.card-content p { font-size: 13px; color: #5f6368; margin-bottom: 15px; }
+
+.tech-row { display: flex; gap: 10px; font-size: 20px; }
+
+/* PROJECT PAGE */
+.project-page { display: flex; flex-direction: column; }
+
+.project-hero {
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  color: white;
+  padding: 60px 40px;
+  text-align: center;
+}
+.project-hero h1 { margin: 0 0 10px 0; font-size: 36px; }
+.project-date { color: #cbd5e1; margin-bottom: 20px; }
+
+.project-tech-stack {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.tech-badge {
+  background: rgba(255,255,255,0.2);
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.project-body { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+.project-body h2 { color: #202124; border-bottom: 2px solid #e8eaed; padding-bottom: 10px; margin-bottom: 20px; }
+.desc-text { line-height: 1.6; color: #4a4a4a; white-space: pre-wrap; margin-bottom: 30px; }
+
+.repo-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #24292e;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+}
+.repo-btn:hover { background: #000; }
+
+.gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.gallery-item { background: #fff; padding: 10px; border-radius: 8px; border: 1px solid #ebebeb; }
+.gallery-img-placeholder { height: 200px; background: #eee; display: flex; align-items: center; justify-content: center; color: #ccc; font-size: 30px; margin-bottom: 10px; }
+.caption { font-size: 13px; color: #666; text-align: center; margin: 0; }
+/* PANTALLA 404 (DINOSAURIO) */
+.error-page {
+  display: flex;
+  justify-content: center;
+  padding-top: 10vh;
+  height: 100%;
+  background-color: #f8f9fa;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+.error-content {
+  max-width: 600px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.dino-container {
+  width: 100%;
+  height: 200px; /* Altura perfecta para que se vea la pista y el dino */
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.dino-container iframe {
+  width: 100%;
+  height: 100%;
+  pointer-events: auto; /* Permite hacer clic/espacio en el iframe */
+}
+
+.error-text h2 {
+  font-size: 24px;
+  color: #202124;
+  margin: 0 0 10px 0;
+  font-weight: normal;
+}
+
+.error-text p {
+  color: #5f6368;
+  font-size: 15px;
+  margin: 0 0 15px 0;
+}
+
+.error-code {
+  color: #5f6368;
+  font-size: 12px;
+  text-transform: uppercase;
+}

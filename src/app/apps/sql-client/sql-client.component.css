@@ -1,0 +1,165 @@
+.sql-app-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  background-color: #1e1e1e;
+  color: #cccccc;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* SIDEBAR */
+.sql-sidebar {
+  width: 220px;
+  background-color: #252526;
+  border-right: 1px solid #333333;
+  display: flex;
+  flex-direction: column;
+}
+.sidebar-header {
+  padding: 15px;
+  font-size: 13px;
+  font-weight: bold;
+  border-bottom: 1px solid #333;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+}
+.table-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: auto;
+}
+.table-list li {
+  padding: 10px 15px;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.table-list li:hover {
+  background-color: #37373d;
+  color: #fff;
+}
+
+/* MAIN PANEL */
+.sql-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* EDITOR */
+.editor-section {
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 2px solid #333;
+}
+.editor-toolbar {
+  background-color: #2d2d2d;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+  border-bottom: 1px solid #3e3e42;
+}
+.tab-title { font-size: 13px; }
+.run-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.run-btn:hover { background-color: #45a049; }
+
+.sql-editor {
+  flex: 1;
+  background-color: #1e1e1e;
+  color: #d4d4d4;
+  border: none;
+  padding: 15px;
+  font-family: 'Consolas', monospace;
+  font-size: 15px;
+  resize: none;
+  outline: none;
+}
+
+/* RESULTS */
+.results-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #1e1e1e;
+  overflow: hidden;
+}
+.results-header {
+  background-color: #2d2d2d;
+  padding: 8px 15px;
+  font-size: 12px;
+  border-bottom: 1px solid #333;
+}
+.results-content {
+  flex: 1;
+  padding: 10px;
+  overflow: auto;
+}
+
+/* TABLES & MESSAGES */
+.table-responsive { width: 100%; overflow-x: auto; }
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.results-table th, .results-table td {
+  border: 1px solid #444;
+  padding: 8px;
+  text-align: left;
+}
+.results-table th {
+  background-color: #2d2d2d;
+  font-weight: bold;
+}
+.error-box { color: #f48771; padding: 10px; font-family: monospace; }
+.success-box { color: #4CAF50; padding: 10px; }
+
+/* Agrega esto a tu CSS existente */
+
+.toolbar-tabs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.new-query-btn {
+  background: transparent;
+  border: none;
+  color: #a9b7c6;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.new-query-btn:hover {
+  background-color: #37373d;
+  color: #fff;
+}
+
+.history-list li {
+  font-family: 'Consolas', monospace; /* Para que parezca código */
+  font-size: 11px;
+  color: #a9b7c6;
+}

@@ -1,0 +1,51 @@
+<div class="settings-container">
+  <aside class="settings-sidebar">
+    <ul>
+      <li class="active"><i class="pi pi-desktop"></i> {{ i18n.translations()['settings_personalization'] }}</li>
+      <li><i class="pi pi-info-circle"></i> {{ i18n.translations()['settings_about'] }}</li>
+    </ul>
+  </aside>
+
+  <main class="settings-content">
+
+    <section class="settings-section">
+      <h2>{{ i18n.translations()['settings_personalization'] }}</h2>
+      <p class="subtitle">{{ i18n.translations()['settings_choose_bg'] }}</p>
+
+      <div class="wallpaper-grid">
+        @for (wp of wallpapers; track wp.id) {
+          <div class="wallpaper-card"
+               [class.active]="themeService.currentWallpaper() === wp.url"
+               (click)="changeWallpaper(wp.url)">
+            <div class="wp-preview" [style.background-image]="'url(' + wp.url + ')'"></div>
+            <span class="wp-name">{{ i18n.translations()[wp.nameKey] }}</span>
+            @if (themeService.currentWallpaper() === wp.url) {
+              <div class="active-badge"><i class="pi pi-check"></i></div>
+            }
+          </div>
+        }
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <section class="settings-section">
+      <h2>{{ i18n.translations()['settings_system_info'] }}</h2>
+      <div class="info-list">
+        <div class="info-item">
+          <span class="info-label">OS:</span>
+          <span class="info-value">FacuOS v1.0.0</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">{{ i18n.translations()['settings_developer'] }}:</span>
+          <span class="info-value">Facundo Rocha</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">{{ i18n.translations()['settings_framework'] }}:</span>
+          <span class="info-value">Angular 17+</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>

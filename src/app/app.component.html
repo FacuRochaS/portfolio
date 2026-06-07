@@ -1,0 +1,8 @@
+@switch (windowManager.systemState().phase) {
+  @case ('login') {
+    <app-login></app-login>
+  }
+  @case ('desktop') {
+    <app-desktop></app-desktop>
+  }
+}

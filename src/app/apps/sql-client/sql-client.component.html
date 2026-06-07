@@ -1,0 +1,95 @@
+<div class="sql-app-container">
+  <aside class="sql-sidebar">
+    <div class="sidebar-header">
+      <i class="pi pi-database"></i>
+      <span>{{ i18n.translations()['sql_schema'] }}</span>
+    </div>
+    <ul class="table-list">
+      @for (table of tables; track table) {
+        <li (click)="loadTableSelect(table)">
+          <i class="pi pi-table"></i> {{ table }}
+        </li>
+      }
+    </ul>
+
+    <div class="sidebar-header" style="margin-top: 15px;">
+      <i class="pi pi-history"></i>
+      <span>{{ i18n.translations()['sql_history'] }}</span>
+    </div>
+    <ul class="table-list history-list">
+      @for (query of queryHistory; track query) {
+        <li (click)="loadFromHistory(query)" [title]="query">
+          <i class="pi pi-code"></i>
+          {{ query | slice:0:25 }}{{ query.length > 25 ? '...' : '' }}
+        </li>
+      }
+    </ul>
+  </aside>
+
+  <main class="sql-main">
+
+    <div class="editor-section">
+      <div class="editor-toolbar">
+        <div class="toolbar-tabs">
+          <span class="tab-title">SQL Query</span>
+          <button class="new-query-btn" (click)="newQuery()" [title]="i18n.translations()['sql_new_query']">
+            <i class="pi pi-plus"></i>
+          </button>
+        </div>
+
+        <button class="run-btn" (click)="runQuery()">
+          <i class="pi pi-play"></i> {{ i18n.translations()['sql_run'] }}
+        </button>
+      </div>
+      <textarea
+        class="sql-editor"
+        [(ngModel)]="currentQuery"
+        spellcheck="false"
+        [placeholder]="i18n.translations()['sql_editor_placeholder']">
+      </textarea>
+    </div>
+
+    <div class="results-section">
+      <div class="results-header">
+        <span>{{ i18n.translations()['sql_results'] }}</span>
+      </div>
+
+      <div class="results-content">
+        @if (errorMessage) {
+          <div class="error-box">
+            <i class="pi pi-times-circle"></i> {{ errorMessage }}
+          </div>
+        }
+
+        @if (successMessage) {
+          <div class="success-box">
+            <i class="pi pi-check-circle"></i> {{ successMessage }}
+          </div>
+        }
+
+        @if (results.length > 0) {
+          <div class="table-responsive">
+            <table class="results-table">
+              <thead>
+              <tr>
+                @for (col of columns; track col) {
+                  <th>{{ col }}</th>
+                }
+              </tr>
+              </thead>
+              <tbody>
+                @for (row of results; track $index) {
+                  <tr>
+                    @for (col of columns; track col) {
+                      <td>{{ row[col] }}</td>
+                    }
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        }
+      </div>
+    </div>
+  </main>
+</div>

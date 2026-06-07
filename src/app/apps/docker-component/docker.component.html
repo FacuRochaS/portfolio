@@ -1,0 +1,79 @@
+<div class="docker-app-container">
+  <aside class="docker-sidebar">
+    <div class="docker-logo">
+      <i class="devicon-docker-plain colored"></i>
+      <span>Docker Dashboard</span>
+    </div>
+    <nav class="docker-nav">
+      <div class="nav-item" [class.active]="activeTab === 'containers'" (click)="setTab('containers')">
+        <i class="pi pi-box"></i> {{ i18n.translations()['docker_containers'] }}
+      </div>
+      <div class="nav-item" [class.active]="activeTab === 'images'" (click)="setTab('images')">
+        <i class="pi pi-clone"></i> {{ i18n.translations()['docker_images'] }}
+      </div>
+      <div class="nav-item" [class.active]="activeTab === 'volumes'" (click)="setTab('volumes')">
+        <i class="pi pi-server"></i> {{ i18n.translations()['docker_volumes'] }}
+      </div>
+    </nav>
+  </aside>
+
+  <main class="docker-main">
+    <div class="docker-header">
+      <h2>{{ i18n.translations()['docker_title_' + activeTab] }}</h2>
+      <div class="search-bar">
+        <i class="pi pi-search"></i>
+        <input type="text" [placeholder]="i18n.translations()['docker_search']">
+      </div>
+    </div>
+
+    @if (activeTab === 'containers') {
+      <div class="containers-list">
+        <div class="list-header">
+          <div class="col-name">{{ i18n.translations()['docker_col_name'] }}</div>
+          <div class="col-image">{{ i18n.translations()['docker_col_image'] }}</div>
+          <div class="col-status">{{ i18n.translations()['docker_col_status'] }}</div>
+          <div class="col-port">{{ i18n.translations()['docker_col_port'] }}</div>
+          <div class="col-actions">{{ i18n.translations()['docker_col_actions'] }}</div>
+        </div>
+
+        @for (container of containers; track container.id) {
+          <div class="container-row">
+            <div class="col-name">
+              <i [class]="container.icon"></i>
+              <div class="name-info">
+                <span class="c-name">{{ container.name }}</span>
+                <span class="c-id">{{ container.id }}</span>
+              </div>
+            </div>
+            <div class="col-image">{{ container.image }}</div>
+            <div class="col-status">
+              <span class="status-badge" [class.running]="container.status === 'Running'">
+                {{ container.status }}
+              </span>
+            </div>
+            <div class="col-port">
+              @if (container.status === 'Running') {
+                <a href="javascript:void(0)" class="port-link">{{ container.port }} <i class="pi pi-external-link"></i></a>
+              } @else {
+                -
+              }
+            </div>
+            <div class="col-actions">
+              <button class="action-btn play-stop" (click)="toggleContainerStatus(container)" [title]="container.status === 'Running' ? i18n.translations()['docker_btn_stop'] : i18n.translations()['docker_btn_start']">
+                <i class="pi" [class.pi-play]="container.status === 'Exited'" [class.pi-stop]="container.status === 'Running'"></i>
+              </button>
+              <button class="action-btn delete" [title]="i18n.translations()['docker_btn_delete']">
+                <i class="pi pi-trash"></i>
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+    } @else {
+      <div class="empty-state">
+        <i class="pi pi-info-circle"></i>
+        <p>{{ i18n.translations()['docker_empty_state_pre'] }} {{ i18n.translations()['docker_' + activeTab] }} {{ i18n.translations()['docker_empty_state_post'] }}</p>
+      </div>
+    }
+  </main>
+</div>
